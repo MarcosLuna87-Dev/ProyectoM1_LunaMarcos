@@ -1,0 +1,21 @@
+/* Reset y configuración base */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 100%;
+}
+
+body{
+    background-color: beige;
+}
+
+.box-color {
+    border: solid 2px black;
+    margin-top: 10px;
+    height: 200px;
+    width: 150px;
+}

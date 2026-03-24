@@ -3,13 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Colorfly Studio "Pallet Generator"</title>
+    <title>Colorfly Studio -"Palette Generator"</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <header>
-        <h1>Colorfly Studio "Pallet Generator"</h1>
+        <h1>Generador de Paletas Interactivo</h1>
+        <p>Herramienta interna para Colorfly Studio</p>
     </header>
+
+    <main>
+        <section id="controls">
+            <div class="control-panel">
+                <label for="palette-size">Selecciona la cantidad de colores que prefieras</label>
+                <select name="palette-size" id="palette-size" >
+                    <option value="6">6</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                </select>
+            </div>
+            <div class="boton-generator">
+                <button id="btn-generator">Generar Paleta</button>
+            </div>
+        </section>
+        <section id="palette-container">
+            <div class="palette-container"></div>
+        </section>
+    </main>
+    <footer></footer>
     <script src="js/script.js"></script>
 </body>
 </html>
