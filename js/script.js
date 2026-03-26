@@ -8,7 +8,16 @@ function getRandomNumber(min, max) {
    return Math.floor(Math.random() * (max - min +1) + min)
 }
 
-function getRandomColor() {
+function getRandomHslColor() {
+    const h = getRandomNumber(0, 360);
+    const s = getRandomNumber(0, 100);
+    const l = getRandomNumber(0, 100);
+    const hsl = `hsl(${h}, ${s}%, ${l}%)`;
+    return hsl;  
+}
+console.log(getRandomHslColor());
+
+function getRandomHexColor() {
     const charactersHex = "ABCDEF0123456789"
     let hexColor = "#";
 
@@ -30,7 +39,7 @@ function getPalette() {
     for (let i = 0; i < paletteSize; i++) {
         const boxColor = document.createElement("div");
         boxColor.className = "box-color";
-        boxColor.innerText = getRandomColor();
+        boxColor.innerText = getRandomHexColor();
         boxColor.style.backgroundColor = boxColor.innerText;
         paletteContainer.appendChild(boxColor);    
     

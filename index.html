@@ -15,12 +15,17 @@
     <main>
         <section id="controls">
             <div class="control-panel">
-                <label for="palette-size">Selecciona la cantidad de colores que prefieras</label>
+                <label for="palette-size">Selecciona la cantidad de colores</label>
                 <select name="palette-size" id="palette-size" >
                     <option value="6">6</option>
                     <option value="8">8</option>
                     <option value="9">9</option>
-                </select>
+                </select><br>
+                <label for="palette-format">Selecciona el formato</label>
+                <select name="palette-format" id="palette-format">
+                    <option value="hsl">HSL</option>
+                    <option value="hex">HEX</option>
+                </select>                
             </div>
             <div class="boton-generator">
                 <button id="btn-generator">Generar Paleta</button>

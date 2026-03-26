@@ -10,12 +10,16 @@ html {
 }
 
 body{
-    background-color: beige;
+    background-color: hsl(91, 56%, 91%);
 }
 
 .box-color {
-    border: solid 2px black;
+    border: solid 1px black;
     margin-top: 10px;
     height: 200px;
-    width: 150px;
+    width: 100%;
+}
+
+.palette-container {
+    display: flex;
 }
