@@ -34,16 +34,28 @@ function getPalette() {
     console.log("El botón funciona bien");
     paletteContainer.innerText = " ";
     const paletteSize = document.getElementById("palette-size").value;
+    const paletteFormat = document.getElementById("palette-format").value;
     console.log(`cantidad de colores: ${paletteSize}`);
+    console.log(`formato elegido: ${paletteFormat}`);
+    console.log(paletteFormat === "hsl");
 
-    for (let i = 0; i < paletteSize; i++) {
-        const boxColor = document.createElement("div");
-        boxColor.className = "box-color";
-        boxColor.innerText = getRandomHexColor();
-        boxColor.style.backgroundColor = boxColor.innerText;
-        paletteContainer.appendChild(boxColor);    
-    
-    }
+    if(paletteFormat === "hsl") {
+        for (let i = 0; i < paletteSize; i++) {
+            const boxColor = document.createElement("div");
+            boxColor.className = "box-color";
+            boxColor.innerText = getRandomHslColor();
+            boxColor.style.backgroundColor = boxColor.innerText;
+            paletteContainer.appendChild(boxColor);   
+        }
+    } else {
+        for (let i = 0; i < paletteSize; i++) {
+           const boxColor = document.createElement("div");
+            boxColor.className = "box-color";
+            boxColor.innerText = getRandomHexColor();
+            boxColor.style.backgroundColor = boxColor.innerText;
+            paletteContainer.appendChild(boxColor);    
+        }
+    }  
     
 }
 
