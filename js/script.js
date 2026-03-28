@@ -41,19 +41,29 @@ function getPalette() {
 
     if(paletteFormat === "hsl") {
         for (let i = 0; i < paletteSize; i++) {
+
+            const boxContainer = document.createElement("div");
+            boxContainer.className = "box-container";
+            paletteContainer.appendChild(boxContainer);
+            boxContainer.innerText = getRandomHslColor();
+
             const boxColor = document.createElement("div");
-            boxColor.className = "box-color";
-            boxColor.innerText = getRandomHslColor();
-            boxColor.style.backgroundColor = boxColor.innerText;
-            paletteContainer.appendChild(boxColor);   
+            boxColor.className = "box-color";            
+            boxColor.style.backgroundColor = boxContainer.innerText;
+            boxContainer.appendChild(boxColor);   
         }
     } else {
         for (let i = 0; i < paletteSize; i++) {
-           const boxColor = document.createElement("div");
-            boxColor.className = "box-color";
-            boxColor.innerText = getRandomHexColor();
-            boxColor.style.backgroundColor = boxColor.innerText;
-            paletteContainer.appendChild(boxColor);    
+
+            const boxContainer = document.createElement("div");
+            boxContainer.className = "box-container";
+            paletteContainer.appendChild(boxContainer);
+            boxContainer.innerText = getRandomHexColor();
+
+            const boxColor = document.createElement("div");
+            boxColor.className = "box-color";            
+            boxColor.style.backgroundColor = boxContainer.innerText;
+            boxContainer.appendChild(boxColor);    
         }
     }  
     

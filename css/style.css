@@ -10,16 +10,65 @@ html {
 }
 
 body{
-    background-color: hsl(120, 15%, 81%)
-}
-
-.box-color {
-    border: solid 1px black;
-    margin-top: 10px;
-    height: 200px;
-    width: 100%;
+    background-color: hsl(227, 29%, 94%);
+    font-family: Helvetica, sans-serif;;
 }
 
 .palette-container {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+}
+
+.box-container{
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+    height: 230px;
+    background-color: #FFFFFF;
+    width: 150px;
+    margin: 10px;
+    border: solid 1px white;
+}
+
+.box-color {
+    border: none;    
+    height: 200px;
+    margin-bottom: 5px;    
+}
+
+header {
+    text-align: center;
+    margin: 1rem 0;
+    padding: 5px;
+    background-color: hsl(227, 29%, 75%);
+}
+
+header p {
+    font-size: 1.2rem;
+    padding: 5px;    
+}
+
+h1 {    
+    font-size: 3rem;
+}
+
+.control-panel {
+    margin-left: 10px;
+}
+
+.boton-generator {
+    display: flex;
+    justify-content: center;
+}
+
+#btn-generator {
+    font-size: x-large;
+    width: 25rem;
+    height: 2.5rem;
+    margin: 1rem 0;
+    background-color: hsl(174, 50%, 59%);
+    border: solid 1px hsl(227, 29%, 90%);
+    cursor: pointer;
 }
