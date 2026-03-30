@@ -75,6 +75,31 @@ h1 {
     max-width: 170px;
     margin: 10px;
     border: solid 2px white;
+    position: relative; /* Importante para que el tooltip se ubique respecto a la caja */
+}
+
+/* Estilos del Tooltip */
+.copy-tooltip {
+    position: absolute;
+    top: -40px; /* Aparece arriba de la caja */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 25px;
+    font-size: 0.8rem;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none; /* Evita que el mouse interfiera con el tooltip */
+    white-space: nowrap;
+    z-index: 10;
+}
+
+/* Clase para mostrar el tooltip */
+.copy-tooltip.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-5px);
 }
 
 .box-color {

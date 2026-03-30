@@ -125,7 +125,34 @@ function rgbToHsl(r, g, b) {
   return `hsl(${h}, ${s}%, ${l}%)`;
 }
 
+function copyToClipboard(text, container) {
+    navigator.clipboard.writeText(text).then(() => {
+        // 1. Crear el elemento tooltip
+        const tooltip = document.createElement("span");
+        tooltip.className = "copy-tooltip";
+        tooltip.innerText = "Código copiado!";
+        
+        // 2. Agregarlo al contenedor del color
+        container.appendChild(tooltip);
 
+        // 3. Forzar un pequeño delay para que la transición de CSS funcione
+        setTimeout(() => {
+            tooltip.classList.add("show");
+        }, 10);
+
+        // 4. Quitarlo después de 1.5 segundos
+        setTimeout(() => {
+            tooltip.classList.remove("show");
+            // Esperamos a que termine la animación de salida para borrarlo del DOM
+            setTimeout(() => {
+                tooltip.remove();
+            }, 300);
+        }, 1500);
+        
+    }).catch(err => {
+        console.error('Error copying text: ', err);
+    });
+}
 
 
 
