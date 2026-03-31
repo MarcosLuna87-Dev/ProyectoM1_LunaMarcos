@@ -24,19 +24,31 @@ function getRandomHexColor() {
 }
 
 function getPalette() {
-    paletteContainer.innerHTML = ""; // Limpiamos el contenedor
-    currentPalette = []; // Vaciamos la paleta anterior
-    
     const paletteSize = document.getElementById("palette-size").value;
     const paletteFormat = document.getElementById("palette-format").value;
+    
+    paletteContainer.innerHTML = "";
 
-    for (let i = 0; i < paletteSize; i++) {
-        // Generamos un color base (siempre HEX para facilitar la conversión luego)
-        const color = getRandomHexColor(); 
-        currentPalette.push(color); // Lo guardamos
+    // Si la paleta está vacía, la inicializamos
+    if (currentPalette.length === 0) {
+        for (let i = 0; i < paletteSize; i++) {
+            currentPalette.push({ color: getRandomHexColor(), isLocked: false });
+        }
+    } else {
+        // Si ya existe, solo actualizamos los que NO están bloqueados
+        for (let i = 0; i < paletteSize; i++) {
+            if (currentPalette[i] && !currentPalette[i].isLocked) {
+                currentPalette[i].color = getRandomHexColor();
+            } else if (!currentPalette[i]) {
+                // Si el usuario aumentó el tamaño de la paleta (ej. de 6 a 8)
+                currentPalette.push({ color: getRandomHexColor(), isLocked: false });
+            }
+        }
+        // Si el usuario disminuyó el tamaño, recortamos el array
+        currentPalette = currentPalette.slice(0, paletteSize);
     }
     
-    renderPalette(paletteFormat); // Llamamos a una función que solo se encargue de dibujar
+    renderPalette(paletteFormat);
 }
 
 btnGenerator.addEventListener("click", getPalette);
@@ -44,30 +56,50 @@ btnGenerator.addEventListener("click", getPalette);
 function renderPalette(format) {
     paletteContainer.innerHTML = "";
 
-    currentPalette.forEach(colorHex => {
+    currentPalette.forEach((item) => {
         const boxContainer = document.createElement("div");
         boxContainer.className = "box-container";
-        boxContainer.style.cursor = "pointer";
-
-        // Determinamos el texto según el formato
-        let displayText;
-        if (format === "hsl") {
-            const rgb = hexToRgbValues(colorHex);
-            displayText = rgbToHsl(rgb.r, rgb.g, rgb.b);
-        } else {
-            displayText = colorHex;
+        
+        // Si el item ya viene bloqueado de antes, le ponemos la clase
+        if (item.isLocked) {
+            boxContainer.classList.add("locked");
         }
 
-        boxContainer.innerText = displayText;
+        const lockBtn = document.createElement("button");
+        lockBtn.className = "lock-btn";
+        lockBtn.innerText = item.isLocked ? "🔒" : "🔓";
+        
+        lockBtn.addEventListener("click", (e) => {
+            e.stopPropagation(); // Importante: evita que se active el copiado al hacer clic en el candado
+            
+            item.isLocked = !item.isLocked; // Invertimos el estado lógico
+            
+            // Actualizamos la interfaz visualmente
+            lockBtn.innerText = item.isLocked ? "🔒" : "🔓";
+            boxContainer.classList.toggle("locked", item.isLocked);
+        });
 
-        // Evento de clic para copiar usando el nuevo tooltip
+        // Lógica de texto (HEX o HSL)
+        let displayText;
+        if (format === "hsl") {
+            const rgb = hexToRgbValues(item.color);
+            displayText = rgbToHsl(rgb.r, rgb.g, rgb.b);
+        } else {
+            displayText = item.color;
+        }
+
+        // Estructura del contenedor
+        boxContainer.innerText = displayText;
+        boxContainer.appendChild(lockBtn);
+
+        // Evento para copiar el código
         boxContainer.addEventListener("click", () => {
             copyToClipboard(displayText, boxContainer);
         });
 
         const boxColor = document.createElement("div");
         boxColor.className = "box-color";            
-        boxColor.style.backgroundColor = colorHex;
+        boxColor.style.backgroundColor = item.color;
         
         boxContainer.appendChild(boxColor);
         paletteContainer.appendChild(boxContainer);

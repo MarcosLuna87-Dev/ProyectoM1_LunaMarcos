@@ -108,3 +108,41 @@ h1 {
     margin-bottom: 5px;    
 }
 
+/* Estilos base del botón de bloqueo */
+.lock-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: rgba(255, 255, 255, 0.8);
+    border: none;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    /* Estado inicial: Invisible */
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out, transform 0.2s ease;
+    z-index: 5;
+}
+
+/* 1. Aparece cuando pasamos el mouse sobre el contenedor */
+.box-container:hover .lock-btn {
+    opacity: 1;
+}
+
+/* 2. Permanece visible si el color está bloqueado (aunque no esté el mouse) */
+.box-container.locked .lock-btn {
+    opacity: 1;
+    background: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.lock-btn:active {
+    transform: scale(0.9);
+}
+
