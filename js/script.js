@@ -1,10 +1,11 @@
-const btnGenerator = document.getElementById("btn-generator");
-
-const paletteContainer = document.querySelector(".palette-container");
-
+// 1. Variables globales======================================================
 let currentPalette = []; // Aquí guardaremos los colores actuales
+const btnGenerator = document.getElementById("btn-generator");
+const btnDownload = document.getElementById("btn-download");
+const paletteContainer = document.querySelector(".palette-container");
+const formatSelect = document.getElementById("palette-format");
 
-
+//2. Funciones de ayuda========================================================
 
 function getRandomNumber(min, max) {
    return Math.floor(Math.random() * (max - min +1) + min)
@@ -22,6 +23,49 @@ function getRandomHexColor() {
 
     return hexColor;
 }
+
+// Función auxiliar para obtener solo los números de hexToRgb
+function hexToRgbValues(hex) {
+    hex = hex.replace(/^#/, '');
+    return {
+        r: parseInt(hex.substring(0, 2), 16),
+        g: parseInt(hex.substring(2, 4), 16),
+        b: parseInt(hex.substring(4, 6), 16)
+    };
+}
+
+function rgbToHsl(r, g, b) {
+  r /= 255;
+  g /= 255;
+  b /= 255;
+
+  const max = Math.max(r, g, b);
+  const min = Math.min(r, g, b);
+  let h, s, l = (max + min) / 2;
+
+  if (max === min) {
+    h = s = 0; // Acromático (gris)
+  } else {
+    const d = max - min;
+    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+
+    switch (max) {
+      case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+      case g: h = (b - r) / d + 2; break;
+      case b: h = (r - g) / d + 4; break;
+    }
+    h /= 6;
+  }
+
+  // Convertimos a los formatos estándar: H(0-360), S(%), L(%)
+  h = Math.round(h * 360);
+  s = Math.round(s * 100);
+  l = Math.round(l * 100);
+
+  return `hsl(${h}, ${s}%, ${l}%)`;
+}
+
+// 3. Funciones Principales=====================================================
 
 function getPalette() {
     const paletteSize = document.getElementById("palette-size").value;
@@ -50,8 +94,6 @@ function getPalette() {
     
     renderPalette(paletteFormat);
 }
-
-btnGenerator.addEventListener("click", getPalette);
 
 function renderPalette(format) {
     paletteContainer.innerHTML = "";
@@ -106,57 +148,6 @@ function renderPalette(format) {
     });
 }
 
-
-// Función auxiliar para obtener solo los números de hexToRgb
-function hexToRgbValues(hex) {
-    hex = hex.replace(/^#/, '');
-    return {
-        r: parseInt(hex.substring(0, 2), 16),
-        g: parseInt(hex.substring(2, 4), 16),
-        b: parseInt(hex.substring(4, 6), 16)
-    };
-}
-
-const formatSelect = document.getElementById("palette-format");
-
-formatSelect.addEventListener("change", () => {
-    // Si ya hay una paleta generada, simplemente la volvemos a dibujar en el nuevo formato
-    if (currentPalette.length > 0) {
-        renderPalette(formatSelect.value);
-    }
-});
-
-function rgbToHsl(r, g, b) {
-  r /= 255;
-  g /= 255;
-  b /= 255;
-
-  const max = Math.max(r, g, b);
-  const min = Math.min(r, g, b);
-  let h, s, l = (max + min) / 2;
-
-  if (max === min) {
-    h = s = 0; // Acromático (gris)
-  } else {
-    const d = max - min;
-    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
-
-    switch (max) {
-      case r: h = (g - b) / d + (g < b ? 6 : 0); break;
-      case g: h = (b - r) / d + 2; break;
-      case b: h = (r - g) / d + 4; break;
-    }
-    h /= 6;
-  }
-
-  // Convertimos a los formatos estándar: H(0-360), S(%), L(%)
-  h = Math.round(h * 360);
-  s = Math.round(s * 100);
-  l = Math.round(l * 100);
-
-  return `hsl(${h}, ${s}%, ${l}%)`;
-}
-
 function copyToClipboard(text, container) {
     navigator.clipboard.writeText(text).then(() => {
         // 1. Crear el elemento tooltip
@@ -185,8 +176,6 @@ function copyToClipboard(text, container) {
         console.error('Error copying text: ', err);
     });
 }
-
-const btnDownload = document.getElementById("btn-download");
 
 function downloadPalette() {
     if (currentPalette.length === 0) {
@@ -222,6 +211,21 @@ function downloadPalette() {
     URL.revokeObjectURL(link.href);
 }
 
+// 4. Event Listeners===========================================================
+
+btnGenerator.addEventListener("click", getPalette);
 btnDownload.addEventListener("click", downloadPalette);
+formatSelect.addEventListener("change", () => {
+    // Si ya hay una paleta generada, simplemente la volvemos a dibujar en el nuevo formato
+    if (currentPalette.length > 0) {
+        renderPalette(formatSelect.value);
+    }
+});
+
+// 5. Inicialización===========================================================
+
+document.addEventListener("DOMContentLoaded", () => {
+    getPalette();
+});
 
 
