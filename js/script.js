@@ -153,7 +153,7 @@ function copyToClipboard(text, container) {
         // 1. Crear el elemento tooltip
         const tooltip = document.createElement("span");
         tooltip.className = "copy-tooltip";
-        tooltip.innerText = "Código copiado!";
+        tooltip.innerText = "Copiado!";
         
         // 2. Agregarlo al contenedor del color
         container.appendChild(tooltip);

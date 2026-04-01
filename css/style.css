@@ -9,16 +9,20 @@ html {
     font-size: 100%;
 }
 
-body{
-    background-color: hsl(227, 29%, 94%);
+body{    
+    text-align: center;
+    background-color: hsl(169, 68%, 85%);
     font-family: Helvetica, sans-serif;
+    display: grid;
+    min-height: 100dvh;
+    grid-template-rows: auto 1fr auto;
 }
 
 header {
-    text-align: center;
     margin: 1rem 0;
     padding: 5px;
-    background-color: hsl(227, 29%, 75%);
+    /* background-color: hsl(227, 29%, 75%); */
+    background-color: hsl(169, 68%, 55%);
 }
 
 header p {
@@ -30,16 +34,11 @@ h1 {
     font-size: 3rem;
 }
 
-.control-panel {
-    text-align: center;
+.control-panel {    
     font-size: 1.1rem;
     line-height: 1.8;
 }
 
-.button-generator {
-    display: flex;
-    justify-content: center;
-}
 
 #btn-generator {
     color: #FFFFFF;
@@ -55,17 +54,18 @@ h1 {
 }
 
 #btn-generator:hover {
-    transform: scale(1.01);
-    color: #000000;
+    transform: scale(1.02);
+    color: hsl(180, 94%, 31%);
 }
 
 #btn-download {
     color: #FFFFFF;
-    font-size: 1.1rem;
+    font-size: 1rem;
     border-radius: 25px;
-    padding: 0 20px;
-    height: 2.5rem;
-    background-color: hsl(150, 29%, 50%); /* Un tono verde para diferenciarlo */
+    margin-top: 20px;
+    padding: 0 10px;
+    height: 2rem;
+    background-color: hsl(150, 29%, 50%);
     border: none;
     cursor: pointer;
     transition: transform 0.1s;
@@ -74,6 +74,7 @@ h1 {
 #btn-download:hover {
     transform: scale(1.05);
     background-color: hsl(150, 29%, 40%);
+    color: hsl(0, 50%, 0%);
 }
 
 .palette-container {
@@ -90,15 +91,22 @@ h1 {
     background-color: #FFFFFF;
     width: 20%;
     max-width: 170px;
+    min-width: 120px;
     margin: 10px;
     border: solid 2px white;
     position: relative; /* Importante para que el tooltip se ubique respecto a la caja */
 }
 
+.box-color {
+    border: none;    
+    height: 200px;
+    margin-bottom: 5px;    
+}
+
 /* Estilos del Tooltip */
 .copy-tooltip {
     position: absolute;
-    top: -40px; /* Aparece arriba de la caja */
+    top: -30px; /* Aparece arriba de la caja */
     left: 50%;
     transform: translateX(-50%);
     background-color: #333;
@@ -117,12 +125,6 @@ h1 {
 .copy-tooltip.show {
     opacity: 1;
     transform: translateX(-50%) translateY(-5px);
-}
-
-.box-color {
-    border: none;    
-    height: 200px;
-    margin-bottom: 5px;    
 }
 
 /* Estilos base del botón de bloqueo */
@@ -162,4 +164,15 @@ h1 {
 .lock-btn:active {
     transform: scale(0.9);
 }
+
+footer {
+    background-color: hsl(169, 68%, 75%);
+}
+
+.copyright-data {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 40px;
+}
+
 
