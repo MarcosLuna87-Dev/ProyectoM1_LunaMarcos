@@ -59,6 +59,23 @@ h1 {
     color: #000000;
 }
 
+#btn-download {
+    color: #FFFFFF;
+    font-size: 1.1rem;
+    border-radius: 25px;
+    padding: 0 20px;
+    height: 2.5rem;
+    background-color: hsl(150, 29%, 50%); /* Un tono verde para diferenciarlo */
+    border: none;
+    cursor: pointer;
+    transition: transform 0.1s;
+}
+
+#btn-download:hover {
+    transform: scale(1.05);
+    background-color: hsl(150, 29%, 40%);
+}
+
 .palette-container {
     display: flex;
     flex-wrap: wrap;

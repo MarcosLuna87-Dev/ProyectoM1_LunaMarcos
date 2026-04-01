@@ -186,5 +186,42 @@ function copyToClipboard(text, container) {
     });
 }
 
+const btnDownload = document.getElementById("btn-download");
+
+function downloadPalette() {
+    if (currentPalette.length === 0) {
+        alert("Primero genera una paleta para poder descargarla");
+        return;
+    }
+
+    const format = document.getElementById("palette-format").value;
+    let content = "Colorfly Studio - Tu Paleta de Colores\n";
+    content += "====================================\n\n";
+
+    currentPalette.forEach((item, index) => {
+        let colorText;
+        if (format === "hsl") {
+            const rgb = hexToRgbValues(item.color);
+            colorText = rgbToHsl(rgb.r, rgb.g, rgb.b);
+        } else {
+            colorText = item.color;
+        }
+        content += `Color ${index + 1}: ${colorText}\n`;
+    });
+
+    // Creamos un "Blob" (Binary Large Object) con el contenido de texto
+    const blob = new Blob([content], { type: "text/plain" });
+    
+    // Creamos un enlace temporal para forzar la descarga
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "mi-paleta-colorfly.txt";
+    
+    // Simulamos el clic y removemos el enlace
+    link.click();
+    URL.revokeObjectURL(link.href);
+}
+
+btnDownload.addEventListener("click", downloadPalette);
 
 
