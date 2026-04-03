@@ -34,7 +34,7 @@ Este proyecto fue construido para dar cumpliento al PI del M1 del plan de estudi
 ### Nota
 * Cuando ingreses a la página tendrá una paleta generada automáticamente, que puedes usar si lo deseas.
 
-## 🛠️ Decisiones Técnicas
+## Decisiones Técnicas
 
 Este proyecto fue construido respetando buenas prácticas, su estructura se creó con HTML Semántico, su diseño con CSS (aplicando un reset básico) y su lógica exclusivamente con **JavaScript Vanilla**, enfocándose en la manipulación del DOM, el manejo de estados y la conversión matemática entre formatos de color.
 
@@ -54,7 +54,7 @@ Este proyecto fue construido respetando buenas prácticas, su estructura se cre�
 
 ### Opción 2 — Clonar con Git
 ```bash
-https://github.com/MarcosLuna87-Dev/ProyectoM1_LunaMarcos.git
+git clone https://github.com/MarcosLuna87-Dev/ProyectoM1_LunaMarcos.git
 cd ProyectoM1_LunaMarcos
 ``` 
 Luego:
