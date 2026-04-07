@@ -82,3 +82,7 @@ ProyectoM1_LunaMarcos/
 ```
 
 ---
+## Autor
+**Marcos Luna**
+
+GitHub: [Ir a mi GitHub](https://github.com/MarcosLuna87-Dev)
